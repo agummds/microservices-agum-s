@@ -1,0 +1,32 @@
+version: "2.4"  # Menggunakan Docker Compose versi 2+
+
+services:
+  item-db:
+    # Menggunakan MongoDB versi 3
+    image: mongo:3
+
+    # Menggunakan volume bernama app-db untuk penyimpanan data
+    volumes:
+      - app-db:/data/db
+
+    # Restart policy agar container otomatis restart jika berhenti
+    restart: always
+
+  item-app:
+    # Menggunakan image dari GitHub Container Registry
+    image: ghcr.io/agummds/item-app:v1
+
+    # Mapping port agar aplikasi dapat diakses dari host pada port 80
+    ports:
+      - "80:8080"
+
+    # Menjamin item-app hanya jalan setelah item-db siap
+    depends_on:
+      - item-db
+
+    # Restart policy untuk auto recovery
+    restart: always
+
+# Pendefinisian volume untuk database
+volumes:
+  app-db:
