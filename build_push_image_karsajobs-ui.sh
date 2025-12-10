@@ -3,7 +3,7 @@
 
 
 # Nama image yang akan dibuat
-IMAGE_NAME="ghcr.io/agummds/karsajobs:latest"
+IMAGE_NAME="ghcr.io/agummds/karsajobs-ui:latest"
 
 # Build Docker image dari Dockerfile
 echo "Building Docker image..."
