@@ -1,0 +1,2 @@
+karsajobs = https://github.com/users/agummds/packages/container/package/karsajobs
+karsajobs-ui = https://github.com/users/agummds/packages/container/package/karsajobs-ui
