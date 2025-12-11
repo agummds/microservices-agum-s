@@ -16,4 +16,4 @@ spec:
         - name: karsajobs-ui
           image: ghcr.io/agummds/karsajobs-ui:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8000
