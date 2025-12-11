@@ -27,12 +27,12 @@ spec:
           # Volume mounting
           volumeMounts:
             - name: mongo-storage
-              mountPath: /data/db              # PV mount path
+              mountPath: /data/db
             - name: mongo-config
-              mountPath: /config              # ConfigMap mount path
+              mountPath: /config             
             - name: mongo-secret
               mountPath: /etc/mongo-credentials
-              readOnly: true                  # Secret should be read-only
+              readOnly: true
 
       # Non-PVC volumes
       volumes:
@@ -42,3 +42,14 @@ spec:
         - name: mongo-secret
           secret:
             secretName: mongo-secret
+
+  # Persistent Volume Claim
+  volumeClaimTemplates:
+    - metadata:
+        name: mongo-storage
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: standard
+        resources:
+          requests:
+            storage: 1Gi
