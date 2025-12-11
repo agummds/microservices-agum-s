@@ -16,25 +16,21 @@ spec:
       containers:
         - name: mongo
           image: mongo:latest
-
-          # MongoDB environment variables (file-based)
           env:
             - name: MONGO_INITDB_ROOT_USERNAME_FILE
               value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
             - name: MONGO_INITDB_ROOT_PASSWORD_FILE
               value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
 
-          # Volume mounting
           volumeMounts:
             - name: mongo-storage
               mountPath: /data/db
             - name: mongo-config
-              mountPath: /config             
+              mountPath: /config
             - name: mongo-secret
               mountPath: /etc/mongo-credentials
               readOnly: true
 
-      # Non-PVC volumes
       volumes:
         - name: mongo-config
           configMap:
@@ -42,14 +38,6 @@ spec:
         - name: mongo-secret
           secret:
             secretName: mongo-secret
-
-  # Persistent Volume Claim
-  volumeClaimTemplates:
-    - metadata:
-        name: mongo-storage
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: standard
-        resources:
-          requests:
-            storage: 1Gi
+        - name: mongo-storage
+          persistentVolumeClaim:
+            claimName: mongo-storage
