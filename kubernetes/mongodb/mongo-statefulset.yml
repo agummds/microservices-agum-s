@@ -41,12 +41,3 @@ spec:
         - name: mongo-secret
           secret:
             secretName: mongo-secret
-
-  volumeClaimTemplates:
-    - metadata:
-        name: mongo-storage
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 1Gi
