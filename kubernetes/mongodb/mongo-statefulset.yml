@@ -27,13 +27,14 @@ spec:
           # Volume mounting
           volumeMounts:
             - name: mongo-storage
-              mountPath: /data/db
+              mountPath: /data/db              # PV mount path
             - name: mongo-config
-              mountPath: /config
+              mountPath: /config              # ConfigMap mount path
             - name: mongo-secret
               mountPath: /etc/mongo-credentials
-              readOnly: true
+              readOnly: true                  # Secret should be read-only
 
+      # Non-PVC volumes
       volumes:
         - name: mongo-config
           configMap:
