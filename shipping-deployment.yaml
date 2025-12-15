@@ -1,21 +1,44 @@
+# Menentukan versi API Kubernetes untuk resource Deployment
 apiVersion: apps/v1
+
+# Menentukan jenis resource Kubernetes, yaitu Deployment
 kind: Deployment
+
 metadata:
+  # Nama Deployment untuk shipping-service
   name: shipping-service
+
+  # Namespace tempat shipping-service dideploy
   namespace: ecommerce
+
 spec:
+  # Jumlah replica pod shipping-service
   replicas: 1
+
+  # Selector untuk menentukan pod yang dikelola oleh Deployment ini
   selector:
     matchLabels:
+      # Deployment ini akan mengelola pod dengan label app=shipping-service
       app: shipping-service
+
+  # Template pod yang akan dibuat oleh Deployment
   template:
     metadata:
+      # Label yang diberikan ke pod
       labels:
         app: shipping-service
+
     spec:
+      # Daftar container yang dijalankan di dalam pod
       containers:
+        # Nama container shipping-service
         - name: shipping-service
+
+          # Container image shipping-service yang disimpan di GitHub Packages (ghcr)
           image: ghcr.io/agummds/shipping-service:1.0
+
+          # Environment variable yang dibutuhkan oleh aplikasi
           env:
+            # URL koneksi ke RabbitMQ menggunakan service name internal Kubernetes
             - name: AMQP_URL
               value: amqp://guest:guest@rabbitmq:5672
