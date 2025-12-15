@@ -1,13 +1,11 @@
 # Menentukan versi API Kubernetes untuk resource Service
 apiVersion: v1
-
 # Menentukan jenis resource Kubernetes, yaitu Service
 kind: Service
 
 metadata:
   # Nama Service yang digunakan sebagai DNS internal di cluster
   name: shipping-service
-
   # Namespace tempat Service shipping-service dibuat
   namespace: ecommerce
 
@@ -16,11 +14,9 @@ spec:
   selector:
     # Service ini akan mengarah ke pod dengan label app=shipping-service
     app: shipping-service
-
   # Daftar port yang diekspos oleh Service
   ports:
     # Port internal yang digunakan oleh shipping-service
     - port: 3001
-
       # Port aplikasi di dalam container shipping-service
       targetPort: 3001
