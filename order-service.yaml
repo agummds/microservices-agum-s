@@ -1,11 +1,22 @@
+# Menentukan versi API Kubernetes untuk resource Service
 apiVersion: v1
+# Menentukan jenis resource Kubernetes, yaitu Service
 kind: Service
+
 metadata:
+  # Nama Service yang digunakan sebagai DNS internal di cluster
   name: order-service
+  # Namespace tempat Service order-service dibuat
   namespace: ecommerce
+
 spec:
+  # Selector untuk menentukan pod yang akan menerima trafik dari Service ini
   selector:
+    # Service ini akan mengarah ke pod dengan label app=order-service
     app: order-service
+  # Daftar port yang diekspos oleh Service
   ports:
+    # Port yang digunakan oleh client di dalam cluster
     - port: 3000
+      # Port aplikasi di dalam container order-service
       targetPort: 3000
